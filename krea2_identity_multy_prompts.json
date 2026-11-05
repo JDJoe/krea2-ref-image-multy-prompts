@@ -1,0 +1,1464 @@
+{
+  "id": "fea25266-25e5-46d7-aff8-d0f9abdb5aba",
+  "revision": 0,
+  "last_node_id": 46,
+  "last_link_id": 29,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "VAELoader",
+      "pos": [
+        40,
+        40
+      ],
+      "size": [
+        300,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            10,
+            11,
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "krea2RealVae_v10.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "krea2RealVae_v10.safetensors"
+      },
+      "ndSuperSelectorEnabled": false,
+      "ndPowerEnabled": false,
+      "extensions": {
+        "ndSuperSelectorEnabled": false,
+        "ndPowerEnabled": false
+      }
+    },
+    {
+      "id": 3,
+      "type": "CLIPLoader",
+      "pos": [
+        40,
+        130
+      ],
+      "size": [
+        300,
+        110
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2,
+            29
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "qwen3VL4BAbliteratedComfyui_v10_full_bf16.safetensors",
+        "krea2",
+        "default"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3VL4BAbliteratedComfyui_v10_full_bf16.safetensors",
+        "type": "krea2",
+        "device": "default"
+      },
+      "ndSuperSelectorEnabled": false,
+      "ndPowerEnabled": false,
+      "extensions": {
+        "ndSuperSelectorEnabled": false,
+        "ndPowerEnabled": false
+      }
+    },
+    {
+      "id": 6,
+      "type": "UNETLoader",
+      "pos": [
+        40,
+        270
+      ],
+      "size": [
+        300,
+        82
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "KREA2/krea2_turbo_fp8_scaled.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "KREA2/krea2_turbo_fp8_scaled.safetensors",
+        "weight_dtype": "default"
+      },
+      "ndSuperSelectorEnabled": false,
+      "ndPowerEnabled": false,
+      "extensions": {
+        "ndSuperSelectorEnabled": false,
+        "ndPowerEnabled": false
+      }
+    },
+    {
+      "id": 15,
+      "type": "KSampler",
+      "pos": [
+        2146.560819063721,
+        395.1978252764893
+      ],
+      "size": [
+        300,
+        290
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 5
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 18
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 19
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 16
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        42,
+        "fixed",
+        10,
+        1,
+        "heunpp2",
+        "sgm_uniform",
+        1
+      ],
+      "widgets_values_named": {
+        "seed": 42,
+        "control_after_generate": "fixed",
+        "steps": 10,
+        "cfg": 1,
+        "sampler_name": "heunpp2",
+        "scheduler": "sgm_uniform",
+        "denoise": 1
+      }
+    },
+    {
+      "id": 17,
+      "type": "VAEDecode",
+      "pos": [
+        2174.6232190637206,
+        201.93653591491704
+      ],
+      "size": [
+        210,
+        50
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 20
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            21
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      }
+    },
+    {
+      "id": 21,
+      "type": "SaveImage",
+      "pos": [
+        1392.3253499572752,
+        437.17519336181635
+      ],
+      "size": [
+        549.452410248108,
+        517.788082241211
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 21
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            22
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "PPR1/plate_press_"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "PPR1/plate_press_"
+      }
+    },
+    {
+      "id": 24,
+      "type": "EmptySD3LatentImage",
+      "pos": [
+        400,
+        680.8720055389404
+      ],
+      "size": [
+        300,
+        120
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 14
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 15
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            16,
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptySD3LatentImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        768,
+        1376,
+        1
+      ],
+      "widgets_values_named": {
+        "width": 768,
+        "height": 1376,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": 25,
+      "type": "PrimitiveInt",
+      "pos": [
+        40,
+        380
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "title": "width",
+      "properties": {
+        "Node name for S&R": "PrimitiveInt",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        768,
+        "fixed"
+      ],
+      "widgets_values_named": {
+        "value": 768,
+        "control_after_generate": "fixed"
+      }
+    },
+    {
+      "id": 26,
+      "type": "PrimitiveInt",
+      "pos": [
+        40,
+        490
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "title": "height",
+      "properties": {
+        "Node name for S&R": "PrimitiveInt",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        1376,
+        "fixed"
+      ],
+      "widgets_values_named": {
+        "value": 1376,
+        "control_after_generate": "fixed"
+      }
+    },
+    {
+      "id": 31,
+      "type": "LoadImage",
+      "pos": [
+        40,
+        610
+      ],
+      "size": [
+        340,
+        360
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "person photo",
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "example.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "example.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 34,
+      "type": "VAEEncode",
+      "pos": [
+        400,
+        561.7440110778808
+      ],
+      "size": [
+        240,
+        60
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 6
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "title": "source latent",
+      "properties": {
+        "Node name for S&R": "VAEEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      }
+    },
+    {
+      "id": 37,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        400,
+        43.488022155761655
+      ],
+      "size": [
+        390,
+        90
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 28
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "title": "krea2_identity_edit v1.2",
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "KREA2/krea2_identity_edit_v1_2.safetensors",
+        1
+      ],
+      "widgets_values_named": {
+        "lora_name": "KREA2/krea2_identity_edit_v1_2.safetensors",
+        "strength_model": 1
+      },
+      "ndSuperSelectorEnabled": false,
+      "ndPowerEnabled": false,
+      "extensions": {
+        "ndSuperSelectorEnabled": false,
+        "ndPowerEnabled": false
+      }
+    },
+    {
+      "id": 38,
+      "type": "PromptBatch",
+      "pos": [
+        813.6561181640623,
+        49.68000000000001
+      ],
+      "size": [
+        540,
+        640
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompts",
+          "shape": 6,
+          "type": "STRING",
+          "links": [
+            23
+          ]
+        },
+        {
+          "name": "seeds",
+          "shape": 6,
+          "type": "INT",
+          "links": [
+            24
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PromptBatch",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "CHAR1 the person in the reference photo\n",
+        "p01\nCreate a photo of CHAR1 wearing a black leather jacket and driving a car, with the same face and hairstyle as the photo. Show CHAR1 from the waist up.\n\np02\nCreate a photo of CHAR1 standing beside the open door of a car, with the same face and hairstyle as the photo. Show CHAR1 from head to toe.\n",
+        "42\n43\n",
+        "xenoflora, 35mm photo, natural daylight\n"
+      ],
+      "widgets_values_named": {
+        "characters": "CHAR1 the person in the reference photo\n",
+        "prompts": "p01\nCreate a photo of CHAR1 wearing a black leather jacket and driving a car, with the same face and hairstyle as the photo. Show CHAR1 from the waist up.\n\np02\nCreate a photo of CHAR1 standing beside the open door of a car, with the same face and hairstyle as the photo. Show CHAR1 from head to toe.\n",
+        "seeds": "42\n43\n",
+        "prefix": "xenoflora, 35mm photo, natural daylight\n"
+      }
+    },
+    {
+      "id": 39,
+      "type": "StartLoop",
+      "pos": [
+        1771.7512190637208,
+        56.280811659545975
+      ],
+      "size": [
+        370,
+        220
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "parent_iteration",
+          "shape": 7,
+          "type": "INT",
+          "link": null
+        },
+        {
+          "name": "initial_iteration_value",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "mode.list",
+          "type": "*",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "iteration_index",
+          "type": "INT",
+          "links": [
+            25
+          ]
+        },
+        {
+          "name": "is_first",
+          "type": "BOOLEAN",
+          "links": null
+        },
+        {
+          "name": "is_last",
+          "type": "BOOLEAN",
+          "links": null
+        },
+        {
+          "name": "list_item",
+          "type": "*",
+          "links": [
+            27
+          ]
+        },
+        {
+          "name": "current_iteration_value",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StartLoop",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "List",
+        false
+      ],
+      "widgets_values_named": {
+        "mode": "List",
+        "cache_iterations": false
+      }
+    },
+    {
+      "id": 40,
+      "type": "GetItemFromList",
+      "pos": [
+        2164.1300190637207,
+        62.65458059570324
+      ],
+      "size": [
+        280,
+        70
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "list",
+          "type": "*",
+          "link": 24
+        },
+        {
+          "name": "index",
+          "type": "INT",
+          "widget": {
+            "name": "index"
+          },
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GetItemFromList",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        0
+      ],
+      "widgets_values_named": {
+        "index": 0
+      }
+    },
+    {
+      "id": 41,
+      "type": "EndLoop",
+      "pos": [
+        1875.9468190637208,
+        379.6581631488036
+      ],
+      "size": [
+        290,
+        140
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "output_value",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "next_iteration_value",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        },
+        {
+          "name": "terminations.termination0",
+          "shape": 7,
+          "type": "*",
+          "link": 22
+        },
+        {
+          "name": "terminations.termination1",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "outputs",
+          "shape": 6,
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EndLoop",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        false
+      ],
+      "widgets_values_named": {
+        "accumulate": false
+      }
+    },
+    {
+      "id": 42,
+      "type": "Krea2EditGroundedEncode",
+      "pos": [
+        1967.3549433190917,
+        743.9382874041748
+      ],
+      "size": [
+        480,
+        250
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 8
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 27
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "title": "Krea2 Edit grounded encode (positive)",
+      "properties": {
+        "Node name for S&R": "Krea2EditGroundedEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        1024,
+        ""
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "grounding_px": 1024,
+        "system_prompt": ""
+      }
+    },
+    {
+      "id": 43,
+      "type": "Krea2EditGroundedEncode",
+      "pos": [
+        400,
+        860
+      ],
+      "size": [
+        420,
+        240
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 9
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "title": "Krea2 Edit grounded encode (negative, empty)",
+      "properties": {
+        "Node name for S&R": "Krea2EditGroundedEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        1024,
+        ""
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "grounding_px": 1024,
+        "system_prompt": ""
+      }
+    },
+    {
+      "id": 44,
+      "type": "Krea2EditModelPatch",
+      "pos": [
+        1391.6640295410157,
+        42.51999999999998
+      ],
+      "size": [
+        390,
+        340
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 4
+        },
+        {
+          "name": "source_latent",
+          "type": "LATENT",
+          "link": 13
+        },
+        {
+          "name": "source_latent_b",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "ref_boost_mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": 11
+        },
+        {
+          "name": "source_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 7
+        },
+        {
+          "name": "source_image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "target_latent",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Krea2EditModelPatch",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        4,
+        1,
+        "fit",
+        "aligned (trained)",
+        "aligned (trained)"
+      ],
+      "widgets_values_named": {
+        "ref_boost": 4,
+        "ref_boost_a": 1,
+        "fit_mode": "fit",
+        "ref_position": "aligned (trained)",
+        "ref_position_a": "aligned (trained)"
+      }
+    },
+    {
+      "id": 45,
+      "type": "Note",
+      "pos": [
+        867.0889636016846,
+        764.4995359710693
+      ],
+      "size": [
+        480,
+        260
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "Note",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "Sample graph: Multy_prompts plus Krea 2 Identity Edit v1.2.\n\nDiffusion model is KREA2/krea2_turbo_fp8_scaled.safetensors.\nIdentity LoRA #37, KREA2/krea2_identity_edit_v1_2.safetensors at strength 1, comes first.\nXenoflora stack #46 at 0.75 comes after it, on the model and on the positive CLIP.\nThe negative grounded encode stays on the CLIP loader.\nPositive stays Krea2 Edit grounded encode. Do not swap it for the text-to-image encoder.\nSource patch: fit, ref_boost 4. Grounding_px 1024.\nStart Loop mode is List. Sampler seed control is fixed.\nOutput is 768x1376.\nLoad Image is example.png. Point it at a full-body photo.\n"
+      ],
+      "widgets_values_named": {
+        "text": "Sample graph: Multy_prompts plus Krea 2 Identity Edit v1.2.\n\nDiffusion model is KREA2/krea2_turbo_fp8_scaled.safetensors.\nIdentity LoRA #37, KREA2/krea2_identity_edit_v1_2.safetensors at strength 1, comes first.\nXenoflora stack #46 at 0.75 comes after it, on the model and on the positive CLIP.\nThe negative grounded encode stays on the CLIP loader.\nPositive stays Krea2 Edit grounded encode. Do not swap it for the text-to-image encoder.\nSource patch: fit, ref_boost 4. Grounding_px 1024.\nStart Loop mode is List. Sampler seed control is fixed.\nOutput is 768x1376.\nLoad Image is example.png. Point it at a full-body photo.\n"
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 46,
+      "type": "Lora Loader Stack (rgthree)",
+      "pos": [
+        400.96798522949223,
+        206.16803138732905
+      ],
+      "size": [
+        340,
+        310
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 29
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            4
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "title": "xenoflora",
+      "properties": {
+        "Node name for S&R": "Lora Loader Stack (rgthree)",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "KREA2/Krea_2_Xenoflora_Trees_tcrzit_BF16-3K.safetensors",
+        0.75,
+        "None",
+        1,
+        "None",
+        1,
+        "None",
+        1
+      ],
+      "widgets_values_named": {
+        "lora_01": "KREA2/Krea_2_Xenoflora_Trees_tcrzit_BF16-3K.safetensors",
+        "strength_01": 0.75,
+        "lora_02": "None",
+        "strength_02": 1,
+        "lora_03": "None",
+        "strength_03": 1,
+        "lora_04": "None",
+        "strength_04": 1
+      },
+      "ndSuperSelectorEnabled": false,
+      "ndPowerEnabled": false,
+      "extensions": {
+        "ndSuperSelectorEnabled": false,
+        "ndPowerEnabled": false
+      }
+    }
+  ],
+  "links": [
+    [
+      1,
+      46,
+      1,
+      42,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      3,
+      0,
+      43,
+      0,
+      "CLIP"
+    ],
+    [
+      3,
+      37,
+      0,
+      46,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      46,
+      0,
+      44,
+      0,
+      "MODEL"
+    ],
+    [
+      5,
+      44,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      6,
+      31,
+      0,
+      34,
+      0,
+      "IMAGE"
+    ],
+    [
+      7,
+      31,
+      0,
+      44,
+      5,
+      "IMAGE"
+    ],
+    [
+      8,
+      31,
+      0,
+      42,
+      1,
+      "IMAGE"
+    ],
+    [
+      9,
+      31,
+      0,
+      43,
+      1,
+      "IMAGE"
+    ],
+    [
+      10,
+      2,
+      0,
+      34,
+      1,
+      "VAE"
+    ],
+    [
+      11,
+      2,
+      0,
+      44,
+      4,
+      "VAE"
+    ],
+    [
+      12,
+      2,
+      0,
+      17,
+      1,
+      "VAE"
+    ],
+    [
+      13,
+      34,
+      0,
+      44,
+      1,
+      "LATENT"
+    ],
+    [
+      14,
+      25,
+      0,
+      24,
+      0,
+      "INT"
+    ],
+    [
+      15,
+      26,
+      0,
+      24,
+      1,
+      "INT"
+    ],
+    [
+      16,
+      24,
+      0,
+      15,
+      3,
+      "LATENT"
+    ],
+    [
+      17,
+      24,
+      0,
+      44,
+      7,
+      "LATENT"
+    ],
+    [
+      18,
+      42,
+      0,
+      15,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      19,
+      43,
+      0,
+      15,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      20,
+      15,
+      0,
+      17,
+      0,
+      "LATENT"
+    ],
+    [
+      21,
+      17,
+      0,
+      21,
+      0,
+      "IMAGE"
+    ],
+    [
+      24,
+      38,
+      1,
+      40,
+      0,
+      "INT"
+    ],
+    [
+      25,
+      39,
+      0,
+      40,
+      1,
+      "INT"
+    ],
+    [
+      26,
+      40,
+      0,
+      15,
+      4,
+      "INT"
+    ],
+    [
+      27,
+      39,
+      3,
+      42,
+      3,
+      "STRING"
+    ],
+    [
+      28,
+      6,
+      0,
+      37,
+      0,
+      "MODEL"
+    ],
+    [
+      29,
+      3,
+      0,
+      46,
+      1,
+      "CLIP"
+    ],
+    [
+      23,
+      38,
+      0,
+      39,
+      2,
+      "STRING"
+    ],
+    [
+      22,
+      21,
+      0,
+      41,
+      2,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "ds": {
+      "scale": 0.6830134553650707,
+      "offset": [
+        164.1343962626635,
+        405.0775115963785
+      ]
+    },
+    "frontendVersion": "1.57.1",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "extensions": {
+    "seed_widgets": {
+      "15": 0,
+      "30": 5
+    }
+  },
+  "version": 0.4
+}
