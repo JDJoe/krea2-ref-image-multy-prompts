@@ -68,6 +68,6 @@ The Load Image widget points at `example.png`. Point it at your photo.
 
 ## Plates
 
-`CHAR1` is the short noun `the person`, so a plate can name the hands and the gaze without pasting a long block each time. The shared prefix still starts with `xenoflora`, then the 35mm daylight line, then one line that keeps the face and hair. Each sample plate states the new clothes, both hands, where the gaze lands, and where the camera sits.
+`CHAR1` is `the brunette woman from reference image1`. `CHAR2` is `the second person, a redhead woman from reference image2`. With the photos as loaded now, the brunette with the feather is in **person photo** and the redhead is in **2nd reference**. `p01` puts CHAR1 in the driver's seat and CHAR2 on the back seat in an orange vest. `p02` puts CHAR1 beside the open door and CHAR2 on the road in a green vest. The shared prefix still starts with `xenoflora`, then the 35mm daylight line, then one line that keeps the face and hair. Each sample plate states the new clothes, both hands, where the gaze lands, and where the camera sits.
 
 Text-to-image with no reference photo is the sample in ComfyUI-Multy_prompts, `krea2_t2i_multy_prompts.json`. That graph includes a style LoRA and uses Text Encode Qwen Image Edit Plus for the plate.
