@@ -1,8 +1,8 @@
 {
   "id": "fea25266-25e5-46d7-aff8-d0f9abdb5aba",
   "revision": 0,
-  "last_node_id": 46,
-  "last_link_id": 29,
+  "last_node_id": 68,
+  "last_link_id": 86,
   "nodes": [
     {
       "id": 2,
@@ -26,7 +26,9 @@
           "links": [
             10,
             11,
-            12
+            12,
+            43,
+            72
           ]
         }
       ],
@@ -72,7 +74,9 @@
           "type": "CLIP",
           "links": [
             2,
-            29
+            29,
+            38,
+            83
           ]
         }
       ],
@@ -166,17 +170,17 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 5
+          "link": 67
         },
         {
           "name": "positive",
           "type": "CONDITIONING",
-          "link": 18
+          "link": 68
         },
         {
           "name": "negative",
           "type": "CONDITIONING",
-          "link": 19
+          "link": 69
         },
         {
           "name": "latent_image",
@@ -212,19 +216,19 @@
       "widgets_values": [
         42,
         "fixed",
-        10,
+        8,
         1,
-        "heunpp2",
-        "sgm_uniform",
+        "euler",
+        "simple",
         1
       ],
       "widgets_values_named": {
         "seed": 42,
         "control_after_generate": "fixed",
-        "steps": 10,
+        "steps": 8,
         "cfg": 1,
-        "sampler_name": "heunpp2",
-        "scheduler": "sgm_uniform",
+        "sampler_name": "euler",
+        "scheduler": "simple",
         "denoise": 1
       }
     },
@@ -355,7 +359,9 @@
           "type": "LATENT",
           "links": [
             16,
-            17
+            17,
+            45,
+            75
           ]
         }
       ],
@@ -485,7 +491,13 @@
             6,
             7,
             8,
-            9
+            9,
+            39,
+            40,
+            44,
+            74,
+            79,
+            85
           ]
         },
         {
@@ -543,7 +555,9 @@
           "name": "LATENT",
           "type": "LATENT",
           "links": [
-            13
+            13,
+            42,
+            71
           ]
         }
       ],
@@ -653,16 +667,16 @@
         }
       },
       "widgets_values": [
-        "CHAR1 the person in the reference photo\n",
-        "p01\nCreate a photo of CHAR1 wearing a black leather jacket and driving a car, with the same face and hairstyle as the photo. Show CHAR1 from the waist up.\n\np02\nCreate a photo of CHAR1 standing beside the open door of a car, with the same face and hairstyle as the photo. Show CHAR1 from head to toe.\n",
+        "CHAR1 the person\n",
+        "p01\nShow CHAR1 from the waist up, wearing a black leather jacket, seated in the driver's seat of a car. Both of CHAR1's hands rest on the steering wheel, fingers relaxed. CHAR1 looks forward through the windshield. The camera sits in the passenger seat at chest height. Daylight falls through the windshield onto CHAR1.\n\np02\nShow CHAR1 from head to toe, standing beside the open door of a car, wearing a black leather jacket, dark trousers, and boots. CHAR1's right hand rests on the top of the open door. CHAR1's left arm hangs at CHAR1's side, fingers relaxed. CHAR1 looks along the road ahead. The camera is pulled well back at waist height, and CHAR1's head and both feet are inside the frame. Daylight falls from above.\n",
         "42\n43\n",
-        "xenoflora, 35mm photo, natural daylight\n"
+        "xenoflora, 35mm photo, natural daylight\nKeep the face and hair of the person in the reference photo.\n"
       ],
       "widgets_values_named": {
-        "characters": "CHAR1 the person in the reference photo\n",
-        "prompts": "p01\nCreate a photo of CHAR1 wearing a black leather jacket and driving a car, with the same face and hairstyle as the photo. Show CHAR1 from the waist up.\n\np02\nCreate a photo of CHAR1 standing beside the open door of a car, with the same face and hairstyle as the photo. Show CHAR1 from head to toe.\n",
+        "characters": "CHAR1 the person\n",
+        "prompts": "p01\nShow CHAR1 from the waist up, wearing a black leather jacket, seated in the driver's seat of a car. Both of CHAR1's hands rest on the steering wheel, fingers relaxed. CHAR1 looks forward through the windshield. The camera sits in the passenger seat at chest height. Daylight falls through the windshield onto CHAR1.\n\np02\nShow CHAR1 from head to toe, standing beside the open door of a car, wearing a black leather jacket, dark trousers, and boots. CHAR1's right hand rests on the top of the open door. CHAR1's left arm hangs at CHAR1's side, fingers relaxed. CHAR1 looks along the road ahead. The camera is pulled well back at waist height, and CHAR1's head and both feet are inside the frame. Daylight falls from above.\n",
         "seeds": "42\n43\n",
-        "prefix": "xenoflora, 35mm photo, natural daylight\n"
+        "prefix": "xenoflora, 35mm photo, natural daylight\nKeep the face and hair of the person in the reference photo.\n"
       }
     },
     {
@@ -720,7 +734,9 @@
           "name": "list_item",
           "type": "*",
           "links": [
-            27
+            27,
+            34,
+            80
           ]
         },
         {
@@ -1099,7 +1115,7 @@
       ],
       "size": [
         480,
-        260
+        360
       ],
       "flags": {},
       "order": 7,
@@ -1115,10 +1131,10 @@
         }
       },
       "widgets_values": [
-        "Sample graph: Multy_prompts plus Krea 2 Identity Edit v1.2.\n\nDiffusion model is KREA2/krea2_turbo_fp8_scaled.safetensors.\nIdentity LoRA #37, KREA2/krea2_identity_edit_v1_2.safetensors at strength 1, comes first.\nXenoflora stack #46 at 0.75 comes after it, on the model and on the positive CLIP.\nThe negative grounded encode stays on the CLIP loader.\nPositive stays Krea2 Edit grounded encode. Do not swap it for the text-to-image encoder.\nSource patch: fit, ref_boost 4. Grounding_px 1024.\nStart Loop mode is List. Sampler seed control is fixed.\nOutput is 768x1376.\nLoad Image is example.png. Point it at a full-body photo.\n"
+        "Sample graph: Multy_prompts plus Krea 2 Identity Edit v1.2.\n\nDiffusion model is KREA2/krea2_turbo_fp8_scaled.safetensors.\nIdentity LoRA #37, KREA2/krea2_identity_edit_v1_2.safetensors at strength 1, comes first.\nXenoflora stack #46 at 0.75 comes after it, on the model and on the positive CLIP.\nThe negative grounded encode stays on the CLIP loader.\nPositive stays Krea2 Edit grounded encode. Do not swap it for the text-to-image encoder.\nSource patch: fit, ref_boost 4, aligned (trained). Grounding_px 1024.\nSampler is euler, simple, 8 steps, CFG 1, denoise 1. That is the Turbo schedule.\nStart Loop mode is List. Sampler seed control stays fixed. Each plate uses its own seed.\nOutput is 768x1376.\nLoad Image is example.png. Point it at a full-body photo.\nSecond reference node 47 is off until \"2nd ref ON\" is true. See the note under that image.\n"
       ],
       "widgets_values_named": {
-        "text": "Sample graph: Multy_prompts plus Krea 2 Identity Edit v1.2.\n\nDiffusion model is KREA2/krea2_turbo_fp8_scaled.safetensors.\nIdentity LoRA #37, KREA2/krea2_identity_edit_v1_2.safetensors at strength 1, comes first.\nXenoflora stack #46 at 0.75 comes after it, on the model and on the positive CLIP.\nThe negative grounded encode stays on the CLIP loader.\nPositive stays Krea2 Edit grounded encode. Do not swap it for the text-to-image encoder.\nSource patch: fit, ref_boost 4. Grounding_px 1024.\nStart Loop mode is List. Sampler seed control is fixed.\nOutput is 768x1376.\nLoad Image is example.png. Point it at a full-body photo.\n"
+        "text": "Sample graph: Multy_prompts plus Krea 2 Identity Edit v1.2.\n\nDiffusion model is KREA2/krea2_turbo_fp8_scaled.safetensors.\nIdentity LoRA #37, KREA2/krea2_identity_edit_v1_2.safetensors at strength 1, comes first.\nXenoflora stack #46 at 0.75 comes after it, on the model and on the positive CLIP.\nThe negative grounded encode stays on the CLIP loader.\nPositive stays Krea2 Edit grounded encode. Do not swap it for the text-to-image encoder.\nSource patch: fit, ref_boost 4, aligned (trained). Grounding_px 1024.\nSampler is euler, simple, 8 steps, CFG 1, denoise 1. That is the Turbo schedule.\nStart Loop mode is List. Sampler seed control stays fixed. Each plate uses its own seed.\nOutput is 768x1376.\nLoad Image is example.png. Point it at a full-body photo.\nSecond reference node 47 is off until \"2nd ref ON\" is true. See the note under that image.\n"
       },
       "color": "#432",
       "bgcolor": "#653"
@@ -1154,14 +1170,18 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            4
+            4,
+            41,
+            70
           ]
         },
         {
           "name": "CLIP",
           "type": "CLIP",
           "links": [
-            1
+            1,
+            37,
+            77
           ]
         }
       ],
@@ -1199,6 +1219,992 @@
       "extensions": {
         "ndSuperSelectorEnabled": false,
         "ndPowerEnabled": false
+      }
+    },
+    {
+      "id": 47,
+      "type": "LoadImage",
+      "pos": [
+        40,
+        1120
+      ],
+      "size": [
+        340,
+        360
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            30,
+            31,
+            32,
+            73,
+            78,
+            84
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "title": "2nd reference",
+      "widgets_values": [
+        "example.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "example.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 48,
+      "type": "PrimitiveBoolean",
+      "pos": [
+        420,
+        1120
+      ],
+      "size": [
+        280,
+        80
+      ],
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": [
+            64,
+            65,
+            66
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveBoolean",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "title": "2nd ref ON",
+      "widgets_values": [
+        false
+      ],
+      "widgets_values_named": {
+        "value": false
+      },
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 49,
+      "type": "PrimitiveBoolean",
+      "pos": [
+        420,
+        1230
+      ],
+      "size": [
+        280,
+        80
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": [
+            58,
+            59,
+            60
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrimitiveBoolean",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "title": "2nd ref is STYLE (material)",
+      "widgets_values": [
+        false
+      ],
+      "widgets_values_named": {
+        "value": false
+      },
+      "color": "#1c2a33",
+      "bgcolor": "#2a4455"
+    },
+    {
+      "id": 50,
+      "type": "Krea2EditGroundedEncode",
+      "pos": [
+        1960,
+        1080
+      ],
+      "size": [
+        480,
+        250
+      ],
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 37
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 39
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 30
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            54
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Krea2EditGroundedEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "title": "2nd ref CHARACTER positive",
+      "widgets_values": [
+        "",
+        1024,
+        ""
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "grounding_px": 1024,
+        "system_prompt": ""
+      }
+    },
+    {
+      "id": 51,
+      "type": "Krea2EditGroundedEncode",
+      "pos": [
+        860,
+        1120
+      ],
+      "size": [
+        420,
+        240
+      ],
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 38
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 40
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            56
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Krea2EditGroundedEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "title": "2nd ref CHARACTER negative",
+      "widgets_values": [
+        "",
+        1024,
+        ""
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "grounding_px": 1024,
+        "system_prompt": ""
+      }
+    },
+    {
+      "id": 52,
+      "type": "Krea2EditModelPatch",
+      "pos": [
+        1390,
+        480
+      ],
+      "size": [
+        390,
+        360
+      ],
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 41
+        },
+        {
+          "name": "source_latent",
+          "type": "LATENT",
+          "link": 42
+        },
+        {
+          "name": "source_latent_b",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "ref_boost_mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": 43
+        },
+        {
+          "name": "source_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 44
+        },
+        {
+          "name": "source_image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 32
+        },
+        {
+          "name": "target_latent",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 45
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            52
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Krea2EditModelPatch",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "title": "2nd ref CHARACTER patch",
+      "widgets_values": [
+        4,
+        4,
+        "fit",
+        "beside (right of target)",
+        "aligned (trained)"
+      ],
+      "widgets_values_named": {
+        "ref_boost": 4,
+        "ref_boost_a": 4,
+        "fit_mode": "fit",
+        "ref_position": "beside (right of target)",
+        "ref_position_a": "aligned (trained)"
+      }
+    },
+    {
+      "id": 59,
+      "type": "LazySwitchKJ",
+      "pos": [
+        2500,
+        80
+      ],
+      "size": [
+        280,
+        100
+      ],
+      "flags": {},
+      "order": 50,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "link": 58
+        },
+        {
+          "name": "on_false",
+          "type": "*",
+          "link": 52
+        },
+        {
+          "name": "on_true",
+          "type": "*",
+          "link": 76
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            61
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LazySwitchKJ",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "cnr_id": "comfyui-kjnodes"
+      },
+      "title": "role \u00b7 model"
+    },
+    {
+      "id": 58,
+      "type": "LazySwitchKJ",
+      "pos": [
+        2820,
+        80
+      ],
+      "size": [
+        280,
+        100
+      ],
+      "flags": {},
+      "order": 51,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "link": 64
+        },
+        {
+          "name": "on_false",
+          "type": "*",
+          "link": 5
+        },
+        {
+          "name": "on_true",
+          "type": "*",
+          "link": 61
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            67
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LazySwitchKJ",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "cnr_id": "comfyui-kjnodes"
+      },
+      "title": "2nd ref \u00b7 model"
+    },
+    {
+      "id": 61,
+      "type": "LazySwitchKJ",
+      "pos": [
+        2500,
+        220
+      ],
+      "size": [
+        280,
+        100
+      ],
+      "flags": {},
+      "order": 52,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "link": 59
+        },
+        {
+          "name": "on_false",
+          "type": "*",
+          "link": 54
+        },
+        {
+          "name": "on_true",
+          "type": "*",
+          "link": 82
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            62
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LazySwitchKJ",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "cnr_id": "comfyui-kjnodes"
+      },
+      "title": "role \u00b7 positive"
+    },
+    {
+      "id": 60,
+      "type": "LazySwitchKJ",
+      "pos": [
+        2820,
+        220
+      ],
+      "size": [
+        280,
+        100
+      ],
+      "flags": {},
+      "order": 53,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "link": 65
+        },
+        {
+          "name": "on_false",
+          "type": "*",
+          "link": 18
+        },
+        {
+          "name": "on_true",
+          "type": "*",
+          "link": 62
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            68
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LazySwitchKJ",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "cnr_id": "comfyui-kjnodes"
+      },
+      "title": "2nd ref \u00b7 positive"
+    },
+    {
+      "id": 63,
+      "type": "LazySwitchKJ",
+      "pos": [
+        2500,
+        360
+      ],
+      "size": [
+        280,
+        100
+      ],
+      "flags": {},
+      "order": 54,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "link": 60
+        },
+        {
+          "name": "on_false",
+          "type": "*",
+          "link": 56
+        },
+        {
+          "name": "on_true",
+          "type": "*",
+          "link": 86
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            63
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LazySwitchKJ",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "cnr_id": "comfyui-kjnodes"
+      },
+      "title": "role \u00b7 negative"
+    },
+    {
+      "id": 62,
+      "type": "LazySwitchKJ",
+      "pos": [
+        2820,
+        360
+      ],
+      "size": [
+        280,
+        100
+      ],
+      "flags": {},
+      "order": 55,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "switch",
+          "type": "BOOLEAN",
+          "link": 66
+        },
+        {
+          "name": "on_false",
+          "type": "*",
+          "link": 19
+        },
+        {
+          "name": "on_true",
+          "type": "*",
+          "link": 63
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            69
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LazySwitchKJ",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        },
+        "cnr_id": "comfyui-kjnodes"
+      },
+      "title": "2nd ref \u00b7 negative"
+    },
+    {
+      "id": 64,
+      "type": "Note",
+      "pos": [
+        40,
+        1520
+      ],
+      "size": [
+        760,
+        340
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "Note",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "2nd reference is OFF until \"2nd ref ON\" is true. Off uses the original single photo. The other branches do not run.\n\n\"2nd ref is STYLE\" matters only while the second ref is on.\n\nOff = character. Image 2 joins the identity edit as the subject. Image 1 stays the first reference.\n\nOn = style, for a face photo plus an abstract material (car paint, a texture).\nThe face stays the subject: beside the canvas, ref_boost 4, so a tight face crop is not pinned huge.\nThe abstract image is material only: bag of features, ref_boost_a 3. That dial is the paint strength. Lower it if the face slips. Raise it if the car paint is too weak.\nThe identity edit patch stays on. The separate style LoRA is not used here, because it was dropping the face.\n\nPoint \"2nd reference\" at the abstract image. The person photo stays in \"person photo\"."
+      ],
+      "widgets_values_named": {
+        "text": "2nd reference is OFF until \"2nd ref ON\" is true. Off uses the original single photo. The other branches do not run.\n\n\"2nd ref is STYLE\" matters only while the second ref is on.\n\nOff = character. Image 2 joins the identity edit as the subject. Image 1 stays the first reference.\n\nOn = style, for a face photo plus an abstract material (car paint, a texture).\nThe face stays the subject: beside the canvas, ref_boost 4, so a tight face crop is not pinned huge.\nThe abstract image is material only: bag of features, ref_boost_a 3. That dial is the paint strength. Lower it if the face slips. Raise it if the car paint is too weak.\nThe identity edit patch stays on. The separate style LoRA is not used here, because it was dropping the face.\n\nPoint \"2nd reference\" at the abstract image. The person photo stays in \"person photo\"."
+      },
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 65,
+      "type": "Krea2EditModelPatch",
+      "pos": [
+        1390,
+        900
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "flags": {},
+      "order": 43,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 70
+        },
+        {
+          "name": "source_latent",
+          "type": "LATENT",
+          "link": 71
+        },
+        {
+          "name": "source_latent_b",
+          "shape": 7,
+          "type": "LATENT",
+          "link": null
+        },
+        {
+          "name": "ref_boost_mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": 72
+        },
+        {
+          "name": "source_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 73
+        },
+        {
+          "name": "source_image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 74
+        },
+        {
+          "name": "target_latent",
+          "shape": 7,
+          "type": "LATENT",
+          "link": 75
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            76
+          ]
+        }
+      ],
+      "title": "STYLE patch \u2014 face locked, image 2 is material",
+      "properties": {
+        "Node name for S&R": "Krea2EditModelPatch",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        4,
+        3,
+        "fit",
+        "beside (right of target)",
+        "bag of features"
+      ],
+      "widgets_values_named": {
+        "ref_boost": 4,
+        "ref_boost_a": 3,
+        "fit_mode": "fit",
+        "ref_position": "beside (right of target)",
+        "ref_position_a": "bag of features"
+      }
+    },
+    {
+      "id": 66,
+      "type": "Krea2EditGroundedEncode",
+      "pos": [
+        1960,
+        1400
+      ],
+      "size": [
+        480,
+        270
+      ],
+      "flags": {},
+      "order": 44,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 77
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 78
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 79
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 81
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            82
+          ]
+        }
+      ],
+      "title": "STYLE positive \u2014 face is image 2",
+      "properties": {
+        "Node name for S&R": "Krea2EditGroundedEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        1024,
+        ""
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "grounding_px": 1024,
+        "system_prompt": ""
+      }
+    },
+    {
+      "id": 67,
+      "type": "Krea2EditGroundedEncode",
+      "pos": [
+        860,
+        1400
+      ],
+      "size": [
+        420,
+        240
+      ],
+      "flags": {},
+      "order": 45,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 83
+        },
+        {
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 84
+        },
+        {
+          "name": "image_b",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 85
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            86
+          ]
+        }
+      ],
+      "title": "STYLE negative",
+      "properties": {
+        "Node name for S&R": "Krea2EditGroundedEncode",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        1024,
+        ""
+      ],
+      "widgets_values_named": {
+        "prompt": "",
+        "grounding_px": 1024,
+        "system_prompt": ""
+      }
+    },
+    {
+      "id": 68,
+      "type": "StringConcatenate",
+      "pos": [
+        1500,
+        1400
+      ],
+      "size": [
+        440,
+        180
+      ],
+      "flags": {},
+      "order": 46,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "string_a",
+          "type": "STRING",
+          "widget": {
+            "name": "string_a"
+          },
+          "link": 80
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            81
+          ]
+        }
+      ],
+      "title": "style prompt suffix",
+      "properties": {
+        "Node name for S&R": "StringConcatenate",
+        "ue_properties": {
+          "widget_ue_connectable": {},
+          "input_ue_unconnectable": {},
+          "version": "7.8"
+        }
+      },
+      "widgets_values": [
+        "",
+        "The person is the woman in the second reference image. Keep the woman's face and hair. The car paint takes its color and texture from the first reference image.",
+        "\n"
+      ],
+      "widgets_values_named": {
+        "string_a": "",
+        "string_b": "The person is the woman in the second reference image. Keep the woman's face and hair. The car paint takes its color and texture from the first reference image.",
+        "delimiter": "\n"
       }
     }
   ],
@@ -1239,8 +2245,8 @@
       5,
       44,
       0,
-      15,
-      0,
+      58,
+      1,
       "MODEL"
     ],
     [
@@ -1343,7 +2349,7 @@
       18,
       42,
       0,
-      15,
+      60,
       1,
       "CONDITIONING"
     ],
@@ -1351,8 +2357,8 @@
       19,
       43,
       0,
-      15,
-      2,
+      62,
+      1,
       "CONDITIONING"
     ],
     [
@@ -1434,9 +2440,382 @@
       41,
       2,
       "IMAGE"
+    ],
+    [
+      30,
+      47,
+      0,
+      50,
+      2,
+      "IMAGE"
+    ],
+    [
+      31,
+      47,
+      0,
+      51,
+      2,
+      "IMAGE"
+    ],
+    [
+      32,
+      47,
+      0,
+      52,
+      6,
+      "IMAGE"
+    ],
+    [
+      34,
+      39,
+      3,
+      50,
+      3,
+      "STRING"
+    ],
+    [
+      37,
+      46,
+      1,
+      50,
+      0,
+      "CLIP"
+    ],
+    [
+      38,
+      3,
+      0,
+      51,
+      0,
+      "CLIP"
+    ],
+    [
+      39,
+      31,
+      0,
+      50,
+      1,
+      "IMAGE"
+    ],
+    [
+      40,
+      31,
+      0,
+      51,
+      1,
+      "IMAGE"
+    ],
+    [
+      41,
+      46,
+      0,
+      52,
+      0,
+      "MODEL"
+    ],
+    [
+      42,
+      34,
+      0,
+      52,
+      1,
+      "LATENT"
+    ],
+    [
+      43,
+      2,
+      0,
+      52,
+      4,
+      "VAE"
+    ],
+    [
+      44,
+      31,
+      0,
+      52,
+      5,
+      "IMAGE"
+    ],
+    [
+      45,
+      24,
+      0,
+      52,
+      7,
+      "LATENT"
+    ],
+    [
+      52,
+      52,
+      0,
+      59,
+      1,
+      "MODEL"
+    ],
+    [
+      54,
+      50,
+      0,
+      61,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      56,
+      51,
+      0,
+      63,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      58,
+      49,
+      0,
+      59,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      59,
+      49,
+      0,
+      61,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      60,
+      49,
+      0,
+      63,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      61,
+      59,
+      0,
+      58,
+      2,
+      "*"
+    ],
+    [
+      62,
+      61,
+      0,
+      60,
+      2,
+      "*"
+    ],
+    [
+      63,
+      63,
+      0,
+      62,
+      2,
+      "*"
+    ],
+    [
+      64,
+      48,
+      0,
+      58,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      65,
+      48,
+      0,
+      60,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      66,
+      48,
+      0,
+      62,
+      0,
+      "BOOLEAN"
+    ],
+    [
+      67,
+      58,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      68,
+      60,
+      0,
+      15,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      69,
+      62,
+      0,
+      15,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      70,
+      46,
+      0,
+      65,
+      0,
+      "MODEL"
+    ],
+    [
+      71,
+      34,
+      0,
+      65,
+      1,
+      "LATENT"
+    ],
+    [
+      72,
+      2,
+      0,
+      65,
+      4,
+      "VAE"
+    ],
+    [
+      73,
+      47,
+      0,
+      65,
+      5,
+      "IMAGE"
+    ],
+    [
+      74,
+      31,
+      0,
+      65,
+      6,
+      "IMAGE"
+    ],
+    [
+      75,
+      24,
+      0,
+      65,
+      7,
+      "LATENT"
+    ],
+    [
+      76,
+      65,
+      0,
+      59,
+      2,
+      "MODEL"
+    ],
+    [
+      77,
+      46,
+      1,
+      66,
+      0,
+      "CLIP"
+    ],
+    [
+      78,
+      47,
+      0,
+      66,
+      1,
+      "IMAGE"
+    ],
+    [
+      79,
+      31,
+      0,
+      66,
+      2,
+      "IMAGE"
+    ],
+    [
+      80,
+      39,
+      3,
+      68,
+      0,
+      "STRING"
+    ],
+    [
+      81,
+      68,
+      0,
+      66,
+      3,
+      "STRING"
+    ],
+    [
+      82,
+      66,
+      0,
+      61,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      83,
+      3,
+      0,
+      67,
+      0,
+      "CLIP"
+    ],
+    [
+      84,
+      47,
+      0,
+      67,
+      1,
+      "IMAGE"
+    ],
+    [
+      85,
+      31,
+      0,
+      67,
+      2,
+      "IMAGE"
+    ],
+    [
+      86,
+      67,
+      0,
+      63,
+      2,
+      "CONDITIONING"
     ]
   ],
-  "groups": [],
+  "groups": [
+    {
+      "id": 1,
+      "title": "2nd reference \u2014 OFF by default",
+      "bounding": [
+        20,
+        1080,
+        1300,
+        760
+      ],
+      "color": "#a1309b",
+      "flags": {}
+    }
+  ],
   "config": {},
   "extra": {
     "ue_links": [],
